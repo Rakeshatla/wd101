@@ -1,38 +1,38 @@
 let userForm = document.getElementById("user-form");
 
-const retrieveEntries = () => {
-  let entries = localStorage.getItem("user-entries");
-  if (entries) {
-    return JSON.parse(entries);
+const rebackEntries = () => {
+  let entrie = localStorage.getItem("user-entries");
+  if (entrie) {
+    return JSON.parse(entrie);
   } else {
     return [];
   }
 };
 
-let userEntries = retrieveEntries();
+let userEntrie = rebackEntries();
 
-const displayEntries = () => {
-  const entries = retrieveEntries();
+const printEntries = () => {
+  const entrie = rebackEntries();
 
-  const tableEntries = entries.map((entry) => {
-    const nameCell = `<td class='border px-4 py-2'>${entry.name}</td>`;
-    const emailCell = `<td class='border px-4 py-2'>${entry.email}</td>`;
-    const passwordCell = `<td class='border px-4 py-2'>${entry.password}</td>`;
-    const dobCell = `<td class='border px-4 py-2'>${entry.dob}</td>`;
+  const tableEntrie = entrie.map((entry) => {
+    const naamCell = `<td class='border px-4 py-2'>${entry.name}</td>`;
+    const emaiCell = `<td class='border px-4 py-2'>${entry.email}</td>`;
+    const passphraseCell = `<td class='border px-4 py-2'>${entry.password}</td>`;
+    const dobirthCell = `<td class='border px-4 py-2'>${entry.dob}</td>`;
     const acceptTermsCell = `<td class='border px-4 py-2'>${entry.acceptedTermsAndconditions}</td>`;
-    const row = `<tr>${nameCell}${emailCell}${passwordCell}${dobCell}${acceptTermsCell}</tr>`;
+    const row = `<tr>${naamCell}${emaiCell}${passphraseCell}${dobirthCell}${acceptTermsCell}</tr>`;
     return row;
   }).join("\n");
 
   const table = `<table class="table-auto w-full">
                   <tr>
-                    <th class="px-4 py-2">Name</th>
+                    <th class="px-4 py-2">name</th>
                     <th class="px-4 py-2">Email</th>
                     <th class="px-4 py-2">Password</th>
                     <th class="px-4 py-2">DOB</th>
                     <th class="px-4 py-2">Accepted Terms?</th>
                   </tr>
-                  ${tableEntries}
+                  ${tableEntrie}
                 </table>`;
 
   let details = document.getElementById("user-entries");
@@ -57,8 +57,6 @@ const saveUserForm = (event) => {
   const password = document.getElementById("password").value;
   const dob = document.getElementById("dob").value;
   const acceptedTermsAndconditions = document.getElementById("acceptTerms").checked;
-
-  // Calculate age and check if it's between 18 and 55
   const age = calculateAge(dob);
   if (age < 18 || age > 55) {
     alert("Age must be between 18 and 55.");
@@ -72,11 +70,11 @@ const saveUserForm = (event) => {
     dob,
     acceptedTermsAndconditions,
   };
-  userEntries.push(entry);
+  userEntrie.push(entry);
 
-  localStorage.setItem("user-entries", JSON.stringify(userEntries));
-  displayEntries();
+  localStorage.setItem("user-entries", JSON.stringify(userEntrie));
+  printEntries();
 };
 
 userForm.addEventListener("submit", saveUserForm);
-displayEntries();
+printEntries();
